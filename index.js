@@ -3,22 +3,34 @@ const path = require("path");
 const crypto = require("crypto");
 const exifParser = require("exif-parser");
 
-/// ================= CLI CONFIGURATION =================
-const args = process.argv.slice(2); // Remove 'node' and 'index.js' from args
+// ================= CLI CONFIGURATION =================
+const rawArgs = process.argv.slice(2); // Remove 'node' and 'index.js' from args
+
+// Check for dry-run flag and remove it from the usable args
+const IS_DRY_RUN = rawArgs.includes("--dry-run");
+const args = rawArgs.filter((a) => a !== "--dry-run");
 
 // Show help if arguments are missing
 if (args.length < 2) {
-    console.log('❌ Error: Missing arguments.');
-    console.log('\nUsage:');
-    console.log('  node index.js <SOURCE_FOLDER> <DESTINATION_FOLDER>');
-    console.log('\nExample:');
-    console.log('  node index.js "./Takeout/Google Photos" "./Final_Gallery"');
-    process.exit(1);
+  console.log("❌ Error: Missing arguments.");
+  console.log("\nUsage:");
+  console.log(
+    "  node index.js <SOURCE_FOLDER> <DESTINATION_FOLDER> [--dry-run]",
+  );
+  console.log("\nExample:");
+  console.log(
+    '  node index.js "./Takeout/Google Photos" "./Final_Gallery" --dry-run',
+  );
+  process.exit(1);
 }
 
 const SOURCE_DIR = args[0];
 const DEST_DIR = args[1];
 const DELETE_JSON = true;
+
+if (IS_DRY_RUN) {
+  console.log("🛡️  DRY RUN MODE ACTIVE: No files will be touched.");
+}
 // Statistics
 let stats = {
   processed: 0,
@@ -64,6 +76,36 @@ async function getFileDate(filePath, filename) {
   return stat.birthtime;
 }
 
+// ================= SAFE FILE OPERATIONS =================
+// Wrap destructive/fs-changing operations so --dry-run can be honored
+async function safeDelete(filePath) {
+  if (IS_DRY_RUN) {
+    console.log(`[DRY-RUN] 🗑️  WOULD delete: ${filePath}`);
+    return;
+  }
+  await fs.remove(filePath);
+}
+
+async function safeRename(oldPath, newPath) {
+  if (IS_DRY_RUN) {
+    console.log(
+      `[DRY-RUN] ✏️  WOULD rename: ${path.basename(oldPath)} -> ${path.basename(newPath)}`,
+    );
+    return;
+  }
+  await fs.rename(oldPath, newPath);
+}
+
+async function safeMove(oldPath, newPath) {
+  if (IS_DRY_RUN) {
+    console.log(
+      `[DRY-RUN] 📂 WOULD move: ${path.basename(oldPath)} -> ${newPath}`,
+    );
+    return;
+  }
+  await fs.move(oldPath, newPath);
+}
+
 // MAIN PROCESS
 async function processDirectory(dir) {
   const files = await fs.readdir(dir);
@@ -82,7 +124,7 @@ async function processDirectory(dir) {
 
     // 1. DELETE JSON/HTML
     if (DELETE_JSON && (file.endsWith(".json") || file.endsWith(".html"))) {
-      await fs.remove(fullPath);
+      await safeDelete(fullPath);
       stats.jsonsDeleted++;
       continue;
     }
@@ -96,11 +138,11 @@ async function processDirectory(dir) {
       if (fileSet.has(originalName)) {
         // The Original exists! Kill it.
         if (await fs.pathExists(originalPath)) {
-          await fs.remove(originalPath);
+          await safeDelete(originalPath);
 
           // Rename "IMG-edited.jpg" to "IMG.jpg"
           const newPath = path.join(dir, originalName);
-          await fs.rename(fullPath, newPath);
+          await safeRename(fullPath, newPath);
 
           stats.originalsReplaced++;
           console.log(
@@ -111,7 +153,7 @@ async function processDirectory(dir) {
         // If no original exists, just rename the edited file to be clean anyway
         const originalName = file.replace("-edited", "");
         const newPath = path.join(dir, originalName);
-        await fs.rename(fullPath, newPath);
+        await safeRename(fullPath, newPath);
       }
     }
   }
@@ -132,7 +174,7 @@ async function processDirectory(dir) {
     const fileHash = await getFileHash(fullPath);
     if (seenHashes.has(fileHash)) {
       console.log(`🗑️ Duplicate Found: ${file} -> Deleting.`);
-      await fs.remove(fullPath);
+      await safeDelete(fullPath);
       stats.duplicatesDeleted++;
       continue;
     }
@@ -144,7 +186,11 @@ async function processDirectory(dir) {
     const month = (date.getMonth() + 1).toString().padStart(2, "0");
 
     const targetDir = path.join(DEST_DIR, year, month);
-    await fs.ensureDir(targetDir);
+    if (!IS_DRY_RUN) {
+      await fs.ensureDir(targetDir);
+    } else {
+      console.log(`[DRY-RUN] Would ensure directory: ${targetDir}`);
+    }
     const targetPath = path.join(targetDir, file);
 
     // Handle naming collision in destination
@@ -152,9 +198,9 @@ async function processDirectory(dir) {
       const ext = path.extname(file);
       const name = path.basename(file, ext);
       const newName = `${name}_${Date.now()}${ext}`;
-      await fs.move(fullPath, path.join(targetDir, newName));
+      await safeMove(fullPath, path.join(targetDir, newName));
     } else {
-      await fs.move(fullPath, targetPath);
+      await safeMove(fullPath, targetPath);
     }
     stats.moved++;
   }
@@ -162,7 +208,11 @@ async function processDirectory(dir) {
 
 (async () => {
   console.log("🚀 Starting Deep Clean & Organize...");
-  await fs.ensureDir(DEST_DIR);
+  if (!IS_DRY_RUN) {
+    await fs.ensureDir(DEST_DIR);
+  } else {
+    console.log(`[DRY-RUN] Would ensure destination directory: ${DEST_DIR}`);
+  }
 
   if (await fs.pathExists(SOURCE_DIR)) {
     await processDirectory(SOURCE_DIR);
