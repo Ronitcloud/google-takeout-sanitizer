@@ -3,16 +3,22 @@ const path = require("path");
 const crypto = require("crypto");
 const exifParser = require("exif-parser");
 
-// CONFIGURATION (Now dynamic!)
-const args = process.argv.slice(2); // Get arguments passed in terminal
-// Default to specific paths if not provided, or show help
-const SOURCE_DIR =
-  args[0] ||
-  console.log("❌ Error: No Source Directory provided.") ||
-  process.exit(1);
-const DEST_DIR = args[1] || "./Final_Gallery"; // Default destination if not provided
-const DELETE_JSON = true;
+/// ================= CLI CONFIGURATION =================
+const args = process.argv.slice(2); // Remove 'node' and 'index.js' from args
 
+// Show help if arguments are missing
+if (args.length < 2) {
+    console.log('❌ Error: Missing arguments.');
+    console.log('\nUsage:');
+    console.log('  node index.js <SOURCE_FOLDER> <DESTINATION_FOLDER>');
+    console.log('\nExample:');
+    console.log('  node index.js "./Takeout/Google Photos" "./Final_Gallery"');
+    process.exit(1);
+}
+
+const SOURCE_DIR = args[0];
+const DEST_DIR = args[1];
+const DELETE_JSON = true;
 // Statistics
 let stats = {
   processed: 0,
