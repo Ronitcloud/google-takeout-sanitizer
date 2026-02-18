@@ -1,0 +1,38 @@
+appId: com.ronitcloud.takeoutcleaner
+productName: Takeout Cleaner Pro
+copyright: Copyright © 2026 Ronit Mehandiratta
+
+directories:
+  output: release
+  buildResources: public
+
+files:
+  - dist/**/*
+  - node_modules/**/*
+  - package.json
+
+asar: false
+
+win:
+  icon: public/icon.png
+  target:
+    - nsis
+  publisherName: Ronit Mehandiratta
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: Takeout Cleaner Pro
+
+mac:
+  icon: public/icon.png
+  target:
+    - dmg
+
+linux:
+  icon: public/icon.png
+  target:
+    - AppImage
+  category: Utility

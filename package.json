@@ -1,27 +1,44 @@
 {
-  "name": "google-takeout-sanitizer",
-  "version": "1.0.0",
-  "description": "A Node.js tool to clean, deduplicate, and organize Google Photos Takeout exports.",
-  "main": "index.js",
-  "bin": {
-    "sanitize-photos": "./index.js"
-  },
+  "name": "takeout-cleaner-pro",
+  "version": "2.0.0",
+  "description": "A desktop app to clean, deduplicate, and organize Google Photos Takeout exports.",
+  "main": "dist/main/main.js",
+  "author": "Ronit Mehandiratta",
+  "license": "MIT",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently \"npm run dev:vite\" \"npm run dev:electron\"",
+    "dev:vite": "vite",
+    "dev:electron": "wait-on http://localhost:5173 && cross-env ELECTRON_START_URL=http://localhost:5173 electron src/main/main.js",
+    "prebuild": "node build.js",
+    "build": "node build.js && electron-builder",
+    "build:win": "node build.js && electron-builder --win",
+    "build:mac": "node build.js && electron-builder --mac",
+    "build:linux": "node build.js && electron-builder --linux",
+    "package": "node build.js && electron-builder --dir",
+    "start:cli": "node index.js"
   },
   "keywords": [
     "google-photos",
     "takeout",
     "organizer",
     "deduplication",
-    "cli"
+    "desktop-app",
+    "electron"
   ],
-  "author": "Ronit Mehandiratta",
-  "license": "MIT",
   "dependencies": {
-    "fs-extra": "^11.0.0",
     "exif-parser": "^0.1.12",
-    "chalk": "^5.0.0" 
+    "fs-extra": "^11.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^8.2.2",
+    "cross-env": "^10.1.0",
+    "electron": "^28.2.0",
+    "electron-builder": "^24.9.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sharp": "^0.34.5",
+    "vite": "^5.0.12",
+    "wait-on": "^7.2.0"
   }
 }

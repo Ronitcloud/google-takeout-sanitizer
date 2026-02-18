@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+        </linearGradient>
+        <radialGradient id="sparkle1">
+            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.9" />
+            <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
+        </radialGradient>
+    </defs>
+    
+    <!-- Background -->
+    <rect width="1024" height="1024" rx="153.6" fill="url(#bgGradient)"/>
+    
+    <!-- Folder tab -->
+    <rect x="256" y="276.47999999999996" 
+          width="204.8" height="81.92" 
+          rx="20.48" fill="rgba(255,255,255,0.3)"/>
+    
+    <!-- Folder body -->
+    <rect x="256" y="358.4" 
+          width="512" height="409.6" 
+          rx="30.72" fill="rgba(255,255,255,0.25)"/>
+    
+    <!-- Sparkles -->
+    <g opacity="0.9">
+        <!-- Sparkle 1 -->
+        <path d="M 256 174.07999999999998 
+                 L 276.48 235.52
+                 L 337.92 256
+                 L 276.48 276.48
+                 L 256 337.92
+                 L 235.52 276.48
+                 L 174.07999999999998 256
+                 L 235.52 235.52 Z" 
+              fill="white"/>
+        
+        <!-- Sparkle 2 -->
+        <path d="M 716.8 143.36 
+                 L 732.16 189.44
+                 L 778.24 204.8
+                 L 732.16 220.16000000000003
+                 L 716.8 266.24
+                 L 701.4399999999999 220.16000000000003
+                 L 655.3599999999999 204.8
+                 L 701.4399999999999 189.44 Z" 
+              fill="white"/>
+        
+        <!-- Sparkle 3 -->
+        <path d="M 768 593.9200000000001 
+                 L 785.408 648.192
+                 L 839.6800000000001 665.6
+                 L 785.408 683.008
+                 L 768 737.28
+                 L 750.592 683.008
+                 L 696.3199999999999 665.6
+                 L 750.592 648.192 Z" 
+              fill="white"/>
+    </g>
+    
+    <!-- Broom handle -->
+    <line x1="665.6" y1="409.6" 
+          x2="563.2" y2="307.20000000000005" 
+          stroke="rgba(255,255,255,0.8)" stroke-width="81.92" stroke-linecap="round"/>
+    
+    <!-- Broom bristles -->
+    <path d="M 512 460.8
+             L 819.2 460.8
+             L 768 716.8
+             L 563.2 716.8 Z"
+          fill="rgba(255,255,255,0.7)"/>
+    
+    <!-- Bristle lines -->
+    <g stroke="rgba(255,255,255,0.3)" stroke-width="20.48">
+        <line x1="563.2" y1="460.8" 
+              x2="583.6800000000001" y2="716.8"/>
+        <line x1="614.4" y1="460.8" 
+              x2="624.64" y2="716.8"/>
+        <line x1="665.6" y1="460.8" 
+              x2="665.6" y2="716.8"/>
+        <line x1="716.8000000000001" y1="460.8" 
+              x2="706.5600000000001" y2="716.8"/>
+        <line x1="768" y1="460.8" 
+              x2="747.52" y2="716.8"/>
+    </g>
+</svg>
