@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "A desktop app to clean, deduplicate, and organize Google Photos Takeout exports.",
   "main": "dist/main/main.js",
-  "author": "Ronit Mehandiratta",
+  "author": "RM_Builds",
   "license": "MIT",
   "scripts": {
     "dev": "concurrently \"npm run dev:vite\" \"npm run dev:electron\"",

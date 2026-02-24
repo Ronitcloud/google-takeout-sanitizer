@@ -1,6 +1,6 @@
 appId: com.ronitcloud.takeoutcleaner
 productName: Takeout Cleaner Pro
-copyright: Copyright © 2026 Ronit Mehandiratta
+copyright: Copyright © 2026 RM_Builds
 
 directories:
   output: release
@@ -17,14 +17,24 @@ win:
   icon: public/icon.png
   target:
     - nsis
-  publisherName: Ronit Mehandiratta
+    - appx
+  publisherName: RM_Builds
+  artifactName: TakeoutCleanerPro-Setup.exe
+
+appx:
+  publisher: CN=16371B55-16D0-42AD-BDD3-6567147AB108
+  publisherDisplayName: RM_Builds
+  identityName: RMBuilds.TakeoutCleanerPro
+  applicationId: TakeoutCleanerPro
+  backgroundColor: "#1a1a2e"
+  displayName: Takeout Cleaner Pro
 
 nsis:
-  oneClick: false
-  allowToChangeInstallationDirectory: true
+  oneClick: true
   createDesktopShortcut: true
   createStartMenuShortcut: true
   shortcutName: Takeout Cleaner Pro
+  uninstallDisplayName: Takeout Cleaner Pro
 
 mac:
   icon: public/icon.png
