@@ -2,7 +2,7 @@
 
 > **Free & Open Source** | Recover 15GB of storage automatically by cleaning Google Photos Takeout exports
 
-![Version](https://img.shields.io/badge/version-2.0.0-blue) ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Mac%20%7C%20Linux-lightgrey) ![License](https://img.shields.io/badge/license-MIT-green) [![Support](https://img.shields.io/badge/Support-Ko--fi-orange)](https://ko-fi.com/ronitcloud)
+![Version](https://img.shields.io/badge/version-2.0.0-blue) ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Mac%20%7C%20Linux-lightgrey) ![License](https://img.shields.io/badge/license-MIT-green) [![Support via Ko-fi](https://img.shields.io/badge/Support-Ko--fi-orange)](https://ko-fi.com/ronitcloud) [![Support via Razorpay](https://img.shields.io/badge/Support%20🇮🇳-Razorpay%20(UPI%2FCard)-blue)](https://razorpay.me/@ronit2322)
 
 ---
 
@@ -121,9 +121,19 @@ This project showcases my skills in:
 
 If this app saved you storage space and time, consider supporting development!
 
+### 🌍 International — Ko-fi (PayPal / Card)
+
 <a href="https://ko-fi.com/ronitcloud" target="_blank">
   <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Support on Ko-fi" />
 </a>
+
+### 🇮🇳 India — Razorpay (UPI / Card / Net Banking)
+
+> **No PayPal?** Indian users can now pay directly via **UPI, credit/debit card, or net banking** — no PayPal account needed!
+
+[![Pay via Razorpay](https://img.shields.io/badge/Pay%20via-Razorpay%20🇮🇳-blue?style=for-the-badge)](https://razorpay.me/@ronit2322)
+
+👉 **[https://razorpay.me/@ronit2322](https://razorpay.me/@ronit2322)**
 
 **Other ways to support:**
 - ⭐ Star this repository

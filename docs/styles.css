@@ -52,6 +52,7 @@ nav {
     font-weight: 700;
     background: linear-gradient(135deg, #818cf8, #c084fc);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -79,6 +80,7 @@ nav {
     line-height: 1.1;
     background: linear-gradient(to right, #fff, #94a3b8);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -246,6 +248,170 @@ footer {
     border-color: var(--primary);
 }
 
+/* ── Support Section ─────────────────────────────────────────────── */
+.support-section {
+    padding: 6rem 0;
+    text-align: center;
+    background: linear-gradient(to bottom, transparent, rgba(99, 102, 241, 0.04));
+}
+
+.support-section h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.support-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 3rem;
+}
+
+.support-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.support-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+
+.support-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--text-muted);
+}
+
+.support-card-featured {
+    border-color: var(--primary);
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
+}
+
+.support-card-featured:hover {
+    box-shadow: 0 0 40px rgba(99, 102, 241, 0.35);
+    border-color: var(--primary);
+}
+
+.support-card-header {
+    padding: 0.6rem 1rem;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid var(--border);
+}
+
+.support-badge {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.2rem 0.8rem;
+    border-radius: 2rem;
+    letter-spacing: 0.04em;
+}
+
+.support-badge.international {
+    background: rgba(16, 185, 129, 0.12);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.support-badge.india {
+    background: rgba(99, 102, 241, 0.14);
+    color: #818cf8;
+    border: 1px solid rgba(99, 102, 241, 0.35);
+}
+
+.support-card-body {
+    padding: 2rem 2rem 2.5rem;
+}
+
+.support-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.support-card-body h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.support-card-body p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+/* Ko-fi button */
+.btn-kofi {
+    background: #ff5e5b;
+    color: #fff;
+    border: none;
+    padding: 0.85rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.btn-kofi:hover {
+    background: #e04e4b;
+    transform: translateY(-2px);
+}
+
+/* Razorpay button */
+.btn-razorpay {
+    background: linear-gradient(135deg, #528ff5, #02042a);
+    background: #528ff5;
+    color: #fff;
+    border: none;
+    padding: 0.85rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-razorpay:hover {
+    background: #3a78e0;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(82, 143, 245, 0.4);
+}
+
+/* Other support pills */
+.other-support {
+    margin-top: 2rem;
+}
+
+.other-support p {
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.other-support-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.other-support-items span {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 2rem;
+    padding: 0.4rem 1.2rem;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+/* ── Responsive ───────────────────────────────────────────────────── */
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 2.5rem;
@@ -254,6 +420,9 @@ footer {
         flex-direction: column;
     }
     .screenshots-grid {
+        grid-template-columns: 1fr;
+    }
+    .support-grid {
         grid-template-columns: 1fr;
     }
 }
